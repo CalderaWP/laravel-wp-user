@@ -9,7 +9,9 @@
             "email": "Josh@calderawp.com"
         }
     ],
-    "require": {},
+    "require": {
+        "guzzlehttp/guzzle": "^6.2"
+    },
     "autoload": {
         "psr-4": {
             "calderawp\\WPUser\\": "src/"

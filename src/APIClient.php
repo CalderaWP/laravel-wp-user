@@ -17,10 +17,13 @@ abstract class APIClient extends BaseClient implements Authenticated {
 	 * Set WPUser object
 	 *
 	 * @param WPUser $WPUser
+	 *
+	 * @return APIClient
 	 */
-	public function setUser( WPUser  $WPUser )
+	public function setUser( WPUser  $WPUser ) : APIClient
 	{
 		$this->WPUser = $WPUser;
+		return $this;
 	}
 
 	/**
@@ -31,7 +34,7 @@ abstract class APIClient extends BaseClient implements Authenticated {
 	public function me()
 	{
 		try {
-			$request = $this->request( 'GET', '/wp/v2/users/me' );
+			$request = $this->request( 'GET', 'wp/v2/users/me' );
 		} catch ( \Exception $e ) {
 			return false;
 		}

@@ -17,17 +17,17 @@ class JWTAuthenticator extends AuthClient {
 	public function login( string $username, string $password ) : bool
 	{
 		try {
-			$response = $this->request( 'POST', '/jwt-auth/v1/token', [
+			$response = $this->request( 'POST', 'jwt-auth/v1/token',
 				[
 					'username' => $username,
 					'password' => $password
 				]
-			] );
+		    );
 		} catch ( \Exception $e ) {
 			return false;
 		}
 
-		$this->WPUser = WPUser::factory( \GuzzleHttp\json_decode( $response->getBody() ) );
+		$this->WPUser = JWTWPUser::factory( \GuzzleHttp\json_decode( $response->getBody() ) );
 		return true;
 
 	}

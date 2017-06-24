@@ -16,13 +16,13 @@ class JWTAuthenticated extends APIClient {
 
 	public function addAuthToHeaders()
 	{
-		$this->headers[ 'Authorization' ] = 'Bearer ' . $this->getUser()->getToken();
+		$this->headers[ 'Authorization' ] = 'Bearer ' . $this->getUser()->token;
 	}
 
 	public function verify() : bool
 	{
 		try{
-			$this->request( 'POST', '/jwt-auth/v1/token/validate' );
+			$this->request( 'POST', 'jwt-auth/v1/token/validate' );
 		}catch ( \Exception $e ){
 			return false;
 		}

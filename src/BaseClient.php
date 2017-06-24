@@ -68,6 +68,10 @@ abstract class BaseClient {
 			$this->addAuthToHeaders();
 		}
 
+		if( ! is_array( $this->headers ) ){
+			$this->headers = [];
+		}
+
 		$args = [
 			'headers' => $this->headers
 		];
@@ -76,7 +80,6 @@ abstract class BaseClient {
 		}else{
 			$args ['json' ] = $data;
 		}
-
 		return $this->guzzle->request( $method, $endpoint,  $args );
 
 	}

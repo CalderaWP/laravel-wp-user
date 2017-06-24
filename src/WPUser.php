@@ -11,27 +11,21 @@ use \Illuminate\Database\Eloquent\Concerns;
  *
  * @package calderawp\WPUser
  */
-class WPUser {
+abstract class WPUser {
 
 	use Concerns\HasAttributes;
 
-	protected $attributes = [
-		'token',
-		'display_name',
-		'email',
-		'nicename'
-	];
 
 	/**
 	 *  Construct from stdClass - IE from API returns
 	 *
 	 * @param \stdClass $obj
 	 *
-	 * @return WPUser
+	 * @return $this
 	 */
-	public static function factory( \stdClass $obj ) : WPUser
+	public static function factory( \stdClass $obj )
 	{
-		$WPUser = new WPUser();
+		$WPUser = new static();
 		foreach ( $WPUser->getAttributes() as $attr ){
 			if( isset( $obj->$attr ) ){
 				$WPUser->$attr = $obj->$attr;

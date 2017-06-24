@@ -3,6 +3,12 @@ Use a WordPress site as the authentication provider for a Laravel app.
 
 Also can act as a WordPress REST API client.
 
+## Goals and Status
+* Authenticate as a WordPress user from Laravel - done.
+* Provide an API client for querying the WordPress REST API from Laravel - done.
+* Provide a WordPress based middleware. - Next step
+
+## Usage
 
 ### Setting Up WordPress
 This library could use other authentication systems but only JWT is implimented.
@@ -61,3 +67,5 @@ NOTES:
     }
 ```
 
+## License
+Copyright 2017 CalderaWP LLC. Licensed under the terms of the GNU GPL V2+. Please share with your neighbor.

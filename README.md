@@ -24,13 +24,18 @@ This library could use other authentication systems but only JWT is implimented.
 Route::post('/wp-login', function( \calderawp\WPUser\JWTAuthenticator $authenticator, \Illuminate\Http\Request $request ){
 	if( $request->has( 'username' ) && $request->has( 'password' ) ){
 		if( $authenticator->login( $request->input( 'username'), $request->input( 'password' ) ) ){
-			$x= 1;
+			$user = \calderawp\WPUser\Model\Model::fromAuth( $authenticator );
 		}
 
 		//return an error;
 	}
 });
 ```
+
+NOTES:
+* This uses a User Model from the package. No migration is provided to save.
+* You could save the WP User in database, with token.
+
 
 ### Example To Authenticate User
 

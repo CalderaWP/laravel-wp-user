@@ -4,6 +4,8 @@
 namespace calderawp\WPUser;
 
 use \Illuminate\Database\Eloquent\Concerns;
+use Illuminate\Database\Eloquent\MassAssignmentException;
+
 /**
  * Class WPUser
  *
@@ -13,8 +15,9 @@ use \Illuminate\Database\Eloquent\Concerns;
  */
 abstract class WPUser {
 
-	use Concerns\HasAttributes;
+	protected $fillable;
 
+	protected $attributes;
 
 	/**
 	 *  Construct from stdClass - IE from API returns
@@ -26,13 +29,13 @@ abstract class WPUser {
 	public static function factory( \stdClass $obj )
 	{
 		$WPUser = new static();
-		foreach ( $WPUser->getAttributes() as $attr ){
+		foreach ( $WPUser->fillable as $attr ){
 			if( isset( $obj->$attr ) ){
 				$WPUser->$attr = $obj->$attr;
 			}else{
-				$attr = str_replace( 'user_', '', $attr );
-				if( isset( $obj->$attr ) ){
-					$WPUser->$attr = $obj->$attr;
+				$_attr =  'user_' . $attr;
+				if( isset( $obj->$_attr ) ){
+					$WPUser->$attr = $obj->$_attr;
 				}
 			}
 		}
@@ -40,13 +43,38 @@ abstract class WPUser {
 		return $WPUser;
 	}
 
-	/**
-	 *
-	 * @return string
-	 */
-	public function getToken()
+	public function get( $name, $default = null )
 	{
-		return $this->getAttribute( 'token' );
+		if ( $this->allowed( $name ) ) {
+			if ( ! isset( $this->attributes[ $name ] ) ) {
+				return $default;
+			}
+
+			return $this->attributes[ $name ];
+
+		}
+
+		return null;
+
 	}
 
+	public function __set( $name, $value )
+	{
+		if( $this->allowed( $name ) ){
+			$this->attributes[ $name ] = $value;
+		}
+
+		return $this;
+	}
+
+	public function __get( $name )
+	{
+		return $this->get( $name );
+
+	}
+
+
+	protected function allowed( $attr ){
+		return in_array( $attr, $this->fillable );
+	}
 }

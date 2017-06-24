@@ -12,7 +12,7 @@ namespace calderawp\WPUser;
  */
 class JWTWPUser extends WPUser{
 
-	protected $attributes = [
+	protected $fillable = [
 		'token',
 		'display_name',
 		'email',

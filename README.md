@@ -13,6 +13,25 @@ This library could use other authentication systems but only JWT is implimented.
 * Activate plugin
 
 
+### Add WordPress Login To Your App
+
+* Config
+** Publish config and set url for WordPress site or use `WPUSERWPURL` in your .env
+** URL must include `/wp-json/` (or whatever) you use WITH trailing slash.
+
+* Add a login route, for example
+```
+Route::post('/wp-login', function( \calderawp\WPUser\JWTAuthenticator $authenticator, \Illuminate\Http\Request $request ){
+	if( $request->has( 'username' ) && $request->has( 'password' ) ){
+		if( $authenticator->login( $request->input( 'username'), $request->input( 'password' ) ) ){
+			$x= 1;
+		}
+
+		//return an error;
+	}
+});
+```
+
 ### Example To Authenticate User
 
 ```

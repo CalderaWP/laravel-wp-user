@@ -53,6 +53,28 @@ abstract class BaseClient {
 
 	}
 
+	/**
+	 * @param string $endpoint
+	 * @param array $query
+	 *
+	 * @return mixed|\Psr\Http\Message\ResponseInterface
+	 */
+	public function get( string  $endpoint, array  $query = [] )
+	{
+		return $this->request( 'GET', $endpoint, $query );
+	}
+
+	/**
+	 * @param string $endpoint
+	 * @param array $body
+	 *
+	 * @return mixed|\Psr\Http\Message\ResponseInterface
+	 */
+	public function post( string  $endpoint, array  $body = [] )
+	{
+		return $this->request( 'POST', $endpoint, $body );
+	}
+
 	/***
 	 * Make an API request
 	 *

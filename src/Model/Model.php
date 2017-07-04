@@ -2,6 +2,7 @@
 
 
 namespace calderawp\WPUser\Model;
+use calderawp\WPUser\Authenticated;
 use calderawp\WPUser\JWTAuthenticator;
 
 /**
@@ -17,5 +18,16 @@ class Model extends \Illuminate\Database\Eloquent\Model {
 	];
 
 
+	public static function fromAuth( Authenticated $authenticated )
+	{
+		$obj = new Model([
+			'token' => $authenticated->token,
+			'email' => $authenticated->email,
+			'name' => $authenticated->name
+		]);
+
+		return $obj;
+
+	}
 
 }

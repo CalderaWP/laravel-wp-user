@@ -17,6 +17,6 @@ class JWTWPUser extends WPUser{
 		'display_name',
 		'email',
 		'nicename',
-		'id'
+		'ID'
 	];
 }

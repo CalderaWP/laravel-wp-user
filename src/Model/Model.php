@@ -11,19 +11,26 @@ use calderawp\WPUser\JWTAuthenticator;
  */
 class Model extends \Illuminate\Database\Eloquent\Model {
 
+	/** @inheritdoc */
 	protected $fillable = [
 		'token',
 		'email',
-		'name'
+		'name',
+		'ID'
 	];
 
-
+	/**
+	 * @param Authenticated $authenticated
+	 *
+	 * @return Model
+	 */
 	public static function fromAuth( Authenticated $authenticated )
 	{
 		$obj = new Model([
 			'token' => $authenticated->token,
 			'email' => $authenticated->email,
-			'name' => $authenticated->name
+			'name' => $authenticated->name,
+			'ID' => $authenticated->ID
 		]);
 
 		return $obj;

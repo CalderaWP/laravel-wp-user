@@ -22,8 +22,8 @@ This library could use other authentication systems but only JWT is implimented.
 ### Add WordPress Login To Your App
 
 * Config
-** Publish config and set url for WordPress site or use `WPUSERWPURL` in your .env
-** URL must include `/wp-json/` (or whatever) you use WITH trailing slash.
+	* Publish config and set url for WordPress site or use `WPUSERWPURL` in your .env
+	* URL must include `/wp-json/` (or whatever) you use WITH trailing slash.
 
 * Add a login route, for example
 ```
